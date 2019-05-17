@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :cities do
-    resources :clients do
+    resources :clients
+    resources :cooks do
      resources :products
     end
-    resources :cooks
   end
   resources :drivers
 end
