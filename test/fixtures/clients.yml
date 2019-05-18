@@ -4,16 +4,22 @@ one:
   name: MyString
   last_name: MyString
   gender: MyString
-  birthdate: 2019-05-17
+  birthdate: 2019-05-18
   email: MyString
   latitude: MyString
   longitude: MyString
+  address: MyString
+  user: MyString
+  password: MyString
 
 two:
   name: MyString
   last_name: MyString
   gender: MyString
-  birthdate: 2019-05-17
+  birthdate: 2019-05-18
   email: MyString
   latitude: MyString
   longitude: MyString
+  address: MyString
+  user: MyString
+  password: MyString
