@@ -1,7 +1,7 @@
 class Client < ApplicationRecord
     belongs_to :city
-    has_many :reviews
-    has_many :orders
+    has_many :reviews, as: :reviewable
+    has_many :orders, as: :orderable
     validates :name, presence: true
     validates :last_name, presence: true
     validates :latitude, presence: true

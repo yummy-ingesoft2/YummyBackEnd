@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  reviewable: one
+  reviewable_type: Reviewable
   qualification: 1
   content: MyText
 
 two:
+  reviewable: two
+  reviewable_type: Reviewable
   qualification: 1
   content: MyText

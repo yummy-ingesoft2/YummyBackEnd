@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     end
   end
   resources :drivers
+  resources :reviews, only: [:create]
+  resources :orders, only: [:create]
 end

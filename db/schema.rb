@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_17_215551) do
+ActiveRecord::Schema.define(version: 2019_05_18_022943) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -63,12 +63,15 @@ ActiveRecord::Schema.define(version: 2019_05_17_215551) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string "orderable_type"
+    t.integer "orderable_id"
     t.boolean "state"
     t.integer "quantity"
     t.integer "cost"
     t.date "order_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable_type_and_orderable_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -83,10 +86,13 @@ ActiveRecord::Schema.define(version: 2019_05_17_215551) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.string "reviewable_type"
+    t.integer "reviewable_id"
     t.integer "qualification"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
   end
 
 end

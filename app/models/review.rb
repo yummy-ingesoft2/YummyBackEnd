@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-    belongs_to :product
-    belongs_tp :client
     validates :qualification, presence: true
+    validates :content, presence: true
+    belongs_to :reviewable, polymorphic: true
 end
