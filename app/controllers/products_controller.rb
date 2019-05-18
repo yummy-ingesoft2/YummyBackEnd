@@ -11,11 +11,11 @@ def show
 	render json:products, status:201
 end
 def create
-	cooks = Cook.find(params[:cook_id])
+	
     product = Product.new(product_params)
 
     if product.save
-      render json: product, status: :created 
+      render json: product, status: :created  
     else
       render json: product.errors, status: :unprocessable_entity
     end
