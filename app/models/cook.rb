@@ -3,8 +3,8 @@ class Cook < ApplicationRecord
     belongs_to :city
     validates :name, presence: true,length: { maximum: 45 }
     validates :last_name, presence: true,length: { maximum: 45 }
-    #validates :state, presence: true
-    #validates :tel, presence: true,length: { maximum: 15 }
+    validates :state, presence: true
+    validates :tel, presence: true,length: { maximum: 15 }
     validates :email,presence: true,format: { with: URI::MailTo::EMAIL_REGEXP } 
     validates :latitude, presence: true,length: { maximum: 30 }
     validates :longitude, presence: true,length: { maximum: 30 }
