@@ -1,12 +1,12 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
 def index
-    cooks = Cook.find(params[:city_id])
+    cooks = Cook.find(params[:cook_id])
     product = cooks.products
     render json:product, status:200
 end
 def show
-	cooks = Cook.find(params[:city_id])
+	cooks = Cook.find(params[:cook_id])
     products = cooks.products.find(params[:id])
 	render json:products, status:201
 end
@@ -15,7 +15,7 @@ def create
     product = Product.new(product_params)
 
     if product.save
-      render json: product, status: :created, location: cooks
+      render json: product, status: :created 
     else
       render json: product.errors, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ def set_product
     @products = cooks.products.find(params[:id])
 end
 def product_params
-    params.require(:cook).permit(:category, :name, :description,:cost,:cook_id)
+    params.require(:product).permit(:category, :name, :description,:cost,:cook_id)
       
 end
 end
