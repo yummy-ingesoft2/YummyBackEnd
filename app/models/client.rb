@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
     belongs_to :city
     has_many :reviews, as: :reviewable
-    has_many :orders
+    has_many :orders, as: :orderable
 
 end

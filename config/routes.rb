@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     end
   end
   resources :drivers
-  resources :comments, only: [:create]
+  resources :reviews, only: [:create]
+  resources :orders, only: [:create]
 end
