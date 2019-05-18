@@ -12,7 +12,7 @@ class CreateClients < ActiveRecord::Migration[5.2]
       t.string :user
       t.string :password
       t.belongs_to :city, index: true
-      
+
       t.timestamps
     end
   end
