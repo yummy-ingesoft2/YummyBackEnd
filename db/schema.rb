@@ -38,17 +38,19 @@ ActiveRecord::Schema.define(version: 2019_05_18_022943) do
   create_table "cooks", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
+    t.boolean "state"
     t.string "gender"
     t.date "birthdate"
+    t.integer "tel"
     t.string "email"
     t.string "latitude"
     t.string "longitude"
     t.string "address"
     t.string "user"
     t.string "password"
+    t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "city_id"
     t.index ["city_id"], name: "index_cooks_on_city_id"
   end
 
@@ -69,9 +71,15 @@ ActiveRecord::Schema.define(version: 2019_05_18_022943) do
     t.integer "quantity"
     t.integer "cost"
     t.date "order_date"
+    t.integer "client_id"
+    t.integer "product_id"
+    t.integer "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_orders_on_client_id"
+    t.index ["driver_id"], name: "index_orders_on_driver_id"
     t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable_type_and_orderable_id"
+    t.index ["product_id"], name: "index_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -90,8 +98,12 @@ ActiveRecord::Schema.define(version: 2019_05_18_022943) do
     t.integer "reviewable_id"
     t.integer "qualification"
     t.text "content"
+    t.integer "client_id"
+    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_reviews_on_client_id"
+    t.index ["product_id"], name: "index_reviews_on_product_id"
     t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
   end
 

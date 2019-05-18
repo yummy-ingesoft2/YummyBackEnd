@@ -3,6 +3,7 @@ class CreateCooks < ActiveRecord::Migration[5.2]
     create_table :cooks do |t|
       t.string :name
       t.string :last_name
+      t.boolean :state
       t.string :gender
       t.date :birthdate
       t.integer :tel
