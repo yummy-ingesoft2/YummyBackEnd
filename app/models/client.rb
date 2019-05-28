@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: clients
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  last_name  :string
+#  gender     :string
+#  birthdate  :date
+#  email      :string
+#  latitude   :string
+#  longitude  :string
+#  address    :string
+#  user       :string
+#  password   :string
+#  city_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Client < ApplicationRecord
     belongs_to :city
     has_many :reviews, as: :reviewable
