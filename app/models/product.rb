@@ -4,12 +4,16 @@
 #
 #  id          :integer          not null, primary key
 #  category    :string
-#  name        :string
-#  description :text
 #  cost        :integer
+#  description :text
+#  name        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  cook_id     :integer
+#
+# Indexes
+#
+#  index_products_on_cook_id  (cook_id)
 #
 
 class Product < ApplicationRecord

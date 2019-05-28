@@ -3,21 +3,25 @@
 # Table name: cooks
 #
 #  id         :integer          not null, primary key
-#  name       :string
-#  last_name  :string
-#  state      :boolean
-#  gender     :string
+#  address    :string
 #  birthdate  :date
-#  tel        :integer
 #  email      :string
+#  gender     :string
+#  last_name  :string
 #  latitude   :string
 #  longitude  :string
-#  address    :string
-#  user       :string
+#  name       :string
 #  password   :string
-#  city_id    :integer
+#  state      :boolean
+#  tel        :integer
+#  user       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  city_id    :integer
+#
+# Indexes
+#
+#  index_cooks_on_city_id  (city_id)
 #
 
 class Cook < ApplicationRecord
