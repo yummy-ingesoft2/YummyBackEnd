@@ -57,7 +57,9 @@ puts 'started loading data'
     end
     
     50.times do
-        dr = Driver.create(user: Faker::Internet.user_name,
+        dr = Driver.create(name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        user: Faker::Internet.user_name,
         password: Faker::Internet.password(8,16),
         email: Faker::Internet.email)
         driversList << dr.id
