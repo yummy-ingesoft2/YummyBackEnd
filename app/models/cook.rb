@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  address    :string
+#  auth_token :string
 #  birthdate  :date
 #  email      :string
 #  gender     :string
@@ -21,7 +22,8 @@
 #
 # Indexes
 #
-#  index_cooks_on_city_id  (city_id)
+#  index_cooks_on_auth_token  (auth_token) UNIQUE
+#  index_cooks_on_city_id     (city_id)
 #
 
 class Cook < ApplicationRecord

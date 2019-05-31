@@ -15,7 +15,7 @@
 # Indexes
 #
 #  index_drivers_on_city_id  (city_id)
-#
+
 
 class Driver < ApplicationRecord
     has_many :orders, as: :orderable

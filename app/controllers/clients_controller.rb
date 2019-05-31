@@ -1,10 +1,11 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :update, :destroy]
+
 def index
-    cities = City.find(params[:city_id])
-    client = cities.clients
-    render json:client, status:200
+    @clients = Client.all
+    render json: @clients
 end
+
 def show
 	cities = City.find(params[:city_id])
     clients = cities.clients.find(params[:id])

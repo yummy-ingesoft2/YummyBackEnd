@@ -2,9 +2,11 @@ class DriversController < ApplicationController
 before_action :set_driver, only: [:show, :update, :destroy]
 
 def index
+
     cities = City.find(params[:city_id])
     driver = cities.drivers
     render json:driver, status:200
+    
 end
 
   
