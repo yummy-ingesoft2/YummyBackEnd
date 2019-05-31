@@ -1,5 +1,6 @@
 class CooksController < ApplicationController
     before_action :set_cook, only: [:show, :update, :destroy]
+    
 def index
     cities = City.find(params[:city_id])
     cook = cities.cooks

@@ -3,13 +3,18 @@
 # Table name: drivers
 #
 #  id         :integer          not null, primary key
-#  user       :string
-#  password   :string
+#  auth_token :string
 #  email      :string
+#  last_name  :string
+#  name       :string
+#  password   :string
+#  user       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  name       :string
-#  last_name  :string
+#
+# Indexes
+#
+#  index_drivers_on_auth_token  (auth_token) UNIQUE
 #
 
 class Driver < ApplicationRecord

@@ -3,7 +3,6 @@ before_action :set_driver, only: [:show, :update, :destroy]
 
 def index
     @drivers = Driver.all
-
     render json: @drivers
 end
 
