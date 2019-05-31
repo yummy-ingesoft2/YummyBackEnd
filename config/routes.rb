@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
   resources :cities do
-    resources :clients
+    resources :drivers
+    resources :clients do 
+      resources :reviews
+    end
     resources :cooks do
-     resources :products
+     resources :products do 
+      resources :reviews
+    end
     end
   end
-  resources :drivers
-  resources :reviews, only: [:create]
-  resources :orders, only: [:create]
+  
+  
+  resources :orders
 end
