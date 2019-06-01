@@ -27,6 +27,9 @@
 #
 
 class Cook < ApplicationRecord
+    has_secure_password
+    before_save   :downcase_email
+    
     has_many :products
     belongs_to :city
     validates :name, presence: true,length: { maximum: 45 }
@@ -39,4 +42,7 @@ class Cook < ApplicationRecord
     validates :address, presence: true,length: { maximum: 45 }
     validates :user, presence: true,length: { maximum: 15 }
     validates :password, presence: true,length: { maximum: 15 }
+    def downcase_email
+        self.email.downcase!
+    end
 end

@@ -33,5 +33,5 @@ class Driver < ApplicationRecord
     validates :email,presence: true,format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: { case_sensitive: false }
     def downcase_email
         self.email.downcase!
-      end
+    end
 end

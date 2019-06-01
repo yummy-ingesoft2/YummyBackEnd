@@ -25,6 +25,9 @@
 #
 
 class Client < ApplicationRecord
+    has_secure_password
+    before_save   :downcase_email
+    
     belongs_to :city
     has_many :reviews, as: :reviewable
     has_many :orders, as: :orderable
@@ -36,4 +39,7 @@ class Client < ApplicationRecord
     validates :user, presence: true,length: { maximum: 15 }
     validates :password, presence: true,length: { maximum: 15 }
     validates :email,presence: true,format: { with: URI::MailTo::EMAIL_REGEXP } 
+    def downcase_email
+        self.email.downcase!
+    end
 end
