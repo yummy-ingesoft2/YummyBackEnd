@@ -1,5 +1,6 @@
 class DriversController < ApplicationController
-before_action :set_driver, only: [:show, :update, :destroy]
+before_action :set_driver, only: [ :update, :destroy]
+before_action :authenticate_driver, only: [:show, :current ]
 
 def index
 
@@ -14,6 +15,9 @@ end
     cities = City.find(params[:city_id])
     drivers = cities.drivers.find(params[:id])
 	render json:drivers, status:201
+  end
+  def current
+    render json: current_driver
   end
 
   def create
@@ -40,7 +44,6 @@ end
     @drivers.destroy
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_driver
       cities = City.find(params[:city_id])
@@ -49,6 +52,6 @@ end
 
     # Only allow a trusted parameter "white list" through.
     def driver_params
-      params.require(:driver).permit(:name,:last_name,:user,:password,:email,:city_id)
+      params.require(:driver).permit(:name,:last_name,:user,:password, :password_confirmation,:email,:city_id)
     end
 end
