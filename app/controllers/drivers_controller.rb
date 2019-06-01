@@ -1,4 +1,5 @@
 class DriversController < ApplicationController
+before_action :authenticate_driver, only: [:show, :current]
 before_action :set_driver, only: [:show, :update, :destroy]
 
 def index
@@ -15,7 +16,9 @@ end
     drivers = cities.drivers.find(params[:id])
 	render json:drivers, status:201
   end
-
+  def current
+    render json: current_driver
+  end
   def create
     cities = City.find(params[:city_id])
     driver = Driver.new(driver_params)
@@ -49,6 +52,6 @@ end
 
     # Only allow a trusted parameter "white list" through.
     def driver_params
-      params.require(:driver).permit(:name,:last_name,:user,:password,:email,:city_id)
+      params.require(:driver).permit(:name,:last_name,:user,:password, :password_confirmation,:email,:city_id)
     end
 end

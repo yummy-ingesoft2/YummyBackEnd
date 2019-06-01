@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  post 'driver_token' => 'driver_token#create'
   resources :cities do
+    get 'drivers/current' => 'drivers#current'
     resources :drivers
     resources :clients do 
       resources :reviews
