@@ -5,7 +5,7 @@ before_action :set_driver, only: [:show, :update, :destroy]
 
 def index
 
-    cities = City.find(params[:city_id])
+    cities = City.find(params[:city_id]).paginate(page: params[:page], per_page: 10)
     driver = cities.drivers
     render json:driver, status:200
     

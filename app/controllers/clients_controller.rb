@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :update, :destroy]
 
 def index
-    cities = City.find(params[:city_id])
+    cities = City.find(params[:city_id]).paginate(page: params[:page], per_page: 10)
     client = cities.clients
     render json:client, status:200
 end

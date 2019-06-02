@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
 def index
-    cooks = Cook.find(params[:cook_id])
+    cooks = Cook.find(params[:cook_id]).paginate(page: params[:page], per_page: 10)
     product = cooks.products
     render json:product, status:200
 end
