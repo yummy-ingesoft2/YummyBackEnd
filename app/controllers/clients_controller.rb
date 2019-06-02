@@ -1,9 +1,11 @@
 class ClientsController < ApplicationController
+  before_action :authenticate_client, only: [:show, :current]
   before_action :set_client, only: [:show, :update, :destroy]
 
 def index
-    @clients = Client.all
-    render json: @clients
+    cities = City.find(params[:city_id])
+    client = cities.clients
+    render json:client, status:200
 end
 
 def show
@@ -11,6 +13,10 @@ def show
     clients = cities.clients.find(params[:id])
 	render json:clients, status:201
 end	
+
+def current
+  render json: current_client
+end
 
 def create
 	cities = City.find(params[:city_id])
@@ -34,12 +40,14 @@ end
 def destroy
 	@clients.destroy
 end
-def set_client
-	cities = City.find(params[:city_id])
-    @clients = cities.clients.find(params[:id])
-end
-def client_params
-      params.require(:client).permit(:name, :last_name, :gender,:birthdate,:email,:latitude,:longitude,:address,:user,:password,:city_id)
-end
+
+  private
+    def set_client
+    	cities = City.find(params[:city_id])
+        @clients = cities.clients.find(params[:id])
+    end
+    def client_params
+          params.require(:client).permit(:name, :last_name, :gender,:birthdate,:email,:latitude,:longitude,:address,:user,:password,:city_id)
+    end
 end
 

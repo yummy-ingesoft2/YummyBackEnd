@@ -28,12 +28,10 @@ ActiveRecord::Schema.define(version: 2019_05_31_154447) do
     t.string "longitude"
     t.string "address"
     t.string "user"
-    t.string "password"
+    t.string "password_digest"
     t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "auth_token"
-    t.index ["auth_token"], name: "index_clients_on_auth_token", unique: true
     t.index ["city_id"], name: "index_clients_on_city_id"
   end
 
@@ -49,12 +47,10 @@ ActiveRecord::Schema.define(version: 2019_05_31_154447) do
     t.string "longitude"
     t.string "address"
     t.string "user"
-    t.string "password"
+    t.string "password_digest"
     t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "auth_token"
-    t.index ["auth_token"], name: "index_cooks_on_auth_token", unique: true
     t.index ["city_id"], name: "index_cooks_on_city_id"
   end
 

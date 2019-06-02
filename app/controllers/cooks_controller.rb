@@ -1,5 +1,6 @@
 class CooksController < ApplicationController
-    before_action :set_cook, only: [:show, :update, :destroy]
+  before_action :authenticate_cook, only: [:show, :current]
+  before_action :set_cook, only: [:show, :update, :destroy]
     
 def index
     cities = City.find(params[:city_id])
@@ -10,7 +11,11 @@ def show
 	cities = City.find(params[:city_id])
     cooks = cities.cooks.find(params[:id])
 	render json:cooks, status:201
-end	
+end
+
+def current
+  render json: current_cook
+end
 
 def create
 	cities = City.find(params[:city_id])
@@ -34,12 +39,14 @@ end
 def destroy
 	@cooks.destroy
 end
-def set_cook
-	cities = City.find(params[:city_id])
-    @cooks = cities.cooks.find(params[:id])
-end
-def cook_params
-      params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:city_id)
-      
-end
+
+  private
+    def set_cook
+    	cities = City.find(params[:city_id])
+        @cooks = cities.cooks.find(params[:id])
+    end
+    def cook_params
+          params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:city_id)
+          
+    end
 end
