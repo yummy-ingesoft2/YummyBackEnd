@@ -52,7 +52,7 @@ class Cook < ApplicationRecord
         self.where("city_id = ? and id = ?",city_id, id)
     end
     
-    def self.get_products
-        self.joins(:products).select('cooks.name, products.name as product_name')
+    def self.get_products(city_id, id)
+        self.where("city_id = ? and id = ?",city_id, id).joins(:products).select('cooks.name, products.name as product_name')
     end
 end

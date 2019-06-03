@@ -1,15 +1,17 @@
 class ReviewsController < ApplicationController
   before_action :set_reviews, only: [:show, :update, :destroy]
   def index
-     products = Product.find(params[:product_id]) 
-     review = products.reviews
-      render json:review, status:200
-end
-def show
-    products = Product.find(params[:product_id])
-    reviews = products.reviews.find(params[:id])
-	render json:reviews, status:201
-end
+    #products = Product.find(params[:product_id]) 
+    #review = products.reviews
+    @reviews = Review.get_reviews_info(params[:product_id], params[:page])
+    render json: @reviews, status:200
+  end
+  def show
+    #products = Product.find(params[:product_id])
+    #reviews = products.reviews.find(params[:id])
+	  review = Review.get_review(params[:product_id], params[:id])
+  	render json:review, status:201
+  end
   def create
     review = Review.new(review_params)
 

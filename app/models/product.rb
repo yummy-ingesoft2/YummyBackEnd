@@ -22,4 +22,12 @@ class Product < ApplicationRecord
     has_many :reviews
     validates :name, presence: true,length: { maximum: 45 }
     validates :cost, presence: true
+    
+    def self.get_products_info(cook_id, page)
+        self.where("cook_id = ?",cook_id).paginate(page: page, per_page: 10).pluck(:name,:cost)
+    end
+    
+    def self.get_product(cook_id, id)
+        self.where("cook_id = ? and id = ?",cook_id, id)
+    end
 end
