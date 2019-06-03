@@ -7,14 +7,12 @@ Rails.application.routes.draw do
     get 'drivers/current' => 'drivers#current'
     resources :drivers
     get 'clients/current' => 'clients#current'
-    resources :clients do 
-      resources :reviews
-    end
+    resources :clients 
     get 'cooks/current' => 'cooks#current'
     resources :cooks do
-     resources :products do 
-      resources :reviews
-    end
+     resources :products do  
+          resources :reviews
+      end
     end
   end
   
