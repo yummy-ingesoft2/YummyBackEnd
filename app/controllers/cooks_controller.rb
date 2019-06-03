@@ -3,8 +3,8 @@ class CooksController < ApplicationController
   before_action :set_cook, only: [:show, :update, :destroy]
     
 def index
-    cities = City.find(params[:city_id]).paginate(page: params[:page], per_page: 10)
-    cook = cities.cooks
+    cities = City.find(params[:city_id])
+    cook = cities.cooks.paginate(page: params[:page], per_page: 10)
     render json:cook, status:200
 end
 def show

@@ -1,8 +1,8 @@
 class ReviewsController < ApplicationController
   def index
     #if 
-      products = Product.find(params[:product_id]).paginate(page: params[:page], per_page: 10)
-      review = products.reviews
+      products = Product.find(params[:product_id])
+      review = products.reviews.paginate(page: params[:page], per_page: 10)
       render json:review, status:200
    # else
     #  clients = Client.find(params[:client_id])
