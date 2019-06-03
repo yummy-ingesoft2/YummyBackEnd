@@ -4,19 +4,20 @@ before_action :authenticate_driver, only: [:show, :current]
 before_action :set_driver, only: [:show, :update, :destroy]
 
 def index
-
-    cities = City.find(params[:city_id])
-    driver = cities.drivers.paginate(page: params[:page], per_page: 10)
-    render json:driver, status:200
-    
+    #cities = City.find(params[:city_id])
+    #driver = cities.drivers.paginate(page: params[:page], per_page: 10)
+    @drivers = Driver.get_drivers_names(params[:city_id], params[:page])
+    render json: @drivers, status:200
 end
 
   
   def show
-    cities = City.find(params[:city_id])
-    drivers = cities.drivers.find(params[:id])
-	render json:drivers, status:201
+    #cities = City.find(params[:city_id])
+    #drivers = cities.drivers.find(params[:id])
+    driver = Driver.get_driver(params[:city_id], params[:id])
+	  render json:drivers, status:201
   end
+  
   def current
     render json: current_driver
   end

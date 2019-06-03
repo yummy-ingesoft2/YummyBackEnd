@@ -3,6 +3,7 @@
 # Table name: drivers
 #
 #  id              :integer          not null, primary key
+#  auth_token      :string
 #  email           :string
 #  last_name       :string
 #  name            :string
@@ -32,5 +33,13 @@ class Driver < ApplicationRecord
     validates :email,presence: true,format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: { case_sensitive: false }
     def downcase_email
         self.email.downcase!
+    end
+    
+    def self.get_drivers_names(city_id, page)
+        self.where("city_id = ?",city_id).paginate(page: page, per_page: 10).pluck(:name)
+    end
+    
+    def self.get_driver(city_id, id)
+        self.where("city_id = ? and id = ?",city_id, id)
     end
 end

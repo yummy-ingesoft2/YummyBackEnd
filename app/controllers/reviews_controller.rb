@@ -6,10 +6,10 @@ class ReviewsController < ApplicationController
       render json:review, status:200
    # else
     #  clients = Client.find(params[:client_id])
-    #  review = clients.reviews
+    #  review = clients.reviews.paginate(page: params[:page], per_page: 10)
     #  render json:review, status:200
     #end
-end
+  end
   def create
     @review = Review.new(review_params)
     if @review.save
@@ -17,7 +17,7 @@ end
     else
       render :new
     end
-end
+  end
 
   private
 

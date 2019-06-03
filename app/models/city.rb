@@ -13,4 +13,8 @@ class City < ApplicationRecord
     has_many :cooks
     has_many :clients
     has_many :drivers
+    
+    def self.get_cities_names(page)
+        self.all.paginate(page: page, per_page: 5).pluck(:name)
+    end
 end

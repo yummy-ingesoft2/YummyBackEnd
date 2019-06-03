@@ -44,6 +44,14 @@ class Cook < ApplicationRecord
         self.email.downcase!
     end
     
+    def self.get_cooks_names(city_id, page)
+        self.where("city_id = ?",city_id).paginate(page: page, per_page: 10).pluck(:name)
+    end
+    
+    def self.get_cook(city_id, id)
+        self.where("city_id = ? and id = ?",city_id, id)
+    end
+    
     def self.get_products
         self.joins(:products).select('cooks.name, products.name as product_name')
     end

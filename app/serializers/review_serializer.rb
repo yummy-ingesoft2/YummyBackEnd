@@ -16,7 +16,8 @@
 #
 #  index_reviews_on_client_id                          (client_id)
 #  index_reviews_on_product_id                         (product_id)
-#  index_reviews_on_reviewable_
+#  index_reviews_on_reviewable_type_and_reviewable_id  (reviewable_type,reviewable_id)
+#
 
 class ReviewSerializer < ActiveModel::Serializer
   attributes :content, :qualification

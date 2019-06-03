@@ -81,7 +81,7 @@ puts 'started loading data'
         
         if i % 2 == 0
             Review.create(qualification: Faker::Number.number(1),
-            content: "",
+            content: "good",
             client_id: cl,
             product_id: pr)
         end
