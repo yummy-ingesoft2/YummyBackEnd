@@ -1,50 +1,60 @@
 class DriversController < ApplicationController
+
+before_action :authenticate_driver, only: [:show, :current]
 before_action :set_driver, only: [:show, :update, :destroy]
 
 def index
-    @drivers = Driver.all
-
-    render json: @drivers
+    #cities = City.find(params[:city_id])
+    #driver = cities.drivers.paginate(page: params[:page], per_page: 10)
+    @drivers = Driver.get_drivers_names(params[:city_id], params[:page])
+    render json: @drivers, status:200
 end
 
-  # GET /zombies/1
+  
   def show
-    render json: @driver
+    #cities = City.find(params[:city_id])
+    #drivers = cities.drivers.find(params[:id])
+    driver = Driver.get_driver(params[:city_id], params[:id])
+	  render json:drivers, status:201
+  end
+  
+  def current
+    render json: current_driver
   end
 
-  # POST /zombies
+
   def create
-    @driver = Driver.new(driver_params)
+    cities = City.find(params[:city_id])
+    driver = Driver.new(driver_params)
 
-    if @driver.save
-      render json: @driver, status: :created, location: @driver
+    if driver.save
+      render json: driver, status: :created, location: cities
     else
-      render json: @driver.errors, status: :unprocessable_entity
+      render json: driver.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /zombies/1
   def update
-    if @driver.update(driver_params)
-      render json: @driver
+    if @drivers.update(driver_params)
+      render json: @drivers
     else
-      render json: @driver.errors, status: :unprocessable_entity
+      render json: @drivers.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /zombies/1
+  
   def destroy
-    @driver.destroy
+    @drivers.destroy
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_driver
-      @driver = Driver.find(params[:id])
+      cities = City.find(params[:city_id])
+      @drivers = cities.drivers.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def driver_params
-      params.require(:driver).permit(:name,:last_name,:user,:password,:email)
+      params.require(:driver).permit(:name,:last_name,:user,:password, :password_confirmation,:email,:city_id)
     end
 end

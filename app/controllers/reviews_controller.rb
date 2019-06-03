@@ -1,16 +1,47 @@
 class ReviewsController < ApplicationController
-def create
-    @review = Review.new(review_params)
-    if @review.save
-      redirect_to [@review.reviewable], notice: 'Comment created'
+  before_action :set_reviews, only: [:show, :update, :destroy]
+  def index
+    #products = Product.find(params[:product_id]) 
+    #review = products.reviews
+    @reviews = Review.get_reviews_info(params[:product_id], params[:page])
+    render json: @reviews, status:200
+  end
+  def show
+    #products = Product.find(params[:product_id])
+    #reviews = products.reviews.find(params[:id])
+	  review = Review.get_review(params[:product_id], params[:id])
+  	render json:review, status:201
+  end
+  def create
+    review = Review.new(review_params)
+
+    if review.save
+      render json: review, status: :created  
     else
-      render :new
+      render json: review.errors, status: :unprocessable_entity
     end
+end
+def update
+  if @reviews.update(review_params)
+    render json: @reviews
+  else
+    render json: @reviews.errors, status: :unprocessable_entity
+  end
+end
+
+# DELETE /zombies/1
+def destroy
+@reviews.destroy
+end
+
+def set_reviews
+products = Product.find(params[:product_id])
+  @reviews = products.reviews.find(params[:id])
 end
 
   private
 
   def review_params
-    params.require(:review).permit(:qualification, :content, :reviewable_id, :reviewable_type)
+    params.require(:review).permit(:qualification, :content, :client_id, :product_id)
   end
 end

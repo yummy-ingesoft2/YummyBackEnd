@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_18_035517) do
+ActiveRecord::Schema.define(version: 2019_06_01_171431) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "name"
+    t.string "password_digest"
+    t.string "email"
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -28,7 +34,7 @@ ActiveRecord::Schema.define(version: 2019_05_18_035517) do
     t.string "longitude"
     t.string "address"
     t.string "user"
-    t.string "password"
+    t.string "password_digest"
     t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_05_18_035517) do
     t.string "longitude"
     t.string "address"
     t.string "user"
-    t.string "password"
+    t.string "password_digest"
     t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,12 +62,14 @@ ActiveRecord::Schema.define(version: 2019_05_18_035517) do
 
   create_table "drivers", force: :cascade do |t|
     t.string "user"
-    t.string "password"
+    t.string "password_digest"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "last_name"
+    t.integer "city_id"
+    t.index ["city_id"], name: "index_drivers_on_city_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -94,8 +102,6 @@ ActiveRecord::Schema.define(version: 2019_05_18_035517) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "reviewable_type"
-    t.integer "reviewable_id"
     t.integer "qualification"
     t.text "content"
     t.integer "client_id"
@@ -104,7 +110,6 @@ ActiveRecord::Schema.define(version: 2019_05_18_035517) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_reviews_on_client_id"
     t.index ["product_id"], name: "index_reviews_on_product_id"
-    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
   end
 
 end

@@ -1,15 +1,21 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
+    
 def index
-    cooks = Cook.find(params[:cook_id])
-    product = cooks.products
-    render json:product, status:200
+    #cook = Cook.find(params[:cook_id])
+    #cook = Cook.get_cook(params[:city_id], params[:cook_id])
+    ##@products = Cook.get_products(params[:city_id], params[:cook_id]).paginate(page: params[:page], per_page: 10)
+    @products = Product.get_products_info(params[:cook_id], params[:page])
+    render json: @products, status:200
 end
+
 def show
-	cooks = Cook.find(params[:cook_id])
-    products = cooks.products.find(params[:id])
-	render json:products, status:201
+	#cooks = Cook.find(params[:cook_id])
+  #products = cooks.products.find(params[:id])
+	product = Product.get_product(params[:cook_id], params[:id])
+	render json:product, status:201
 end
+
 def create
 	
     product = Product.new(product_params)

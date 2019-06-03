@@ -57,9 +57,12 @@ puts 'started loading data'
     end
     
     50.times do
-        dr = Driver.create(user: Faker::Internet.user_name,
+        dr = Driver.create(name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        user: Faker::Internet.user_name,
         password: Faker::Internet.password(8,16),
-        email: Faker::Internet.email)
+        email: Faker::Internet.email,
+        city_id: ci.id)
         driversList << dr.id
     end
     
@@ -68,17 +71,17 @@ puts 'started loading data'
         pr = productsList.sample
         dr = driversList.sample
         
-        Order.create(state: Faker::Boolean.boolean,
-        quantity: Faker::Number.number(2),
-        cost: Faker::Commerce.price(0..100.0, false),
-        order_date: Faker::Date.forward(100),
-        client_id: cl, 
-        product_id: pr,
-        driver_id: dr)
+        #Order.create(state: Faker::Boolean.boolean,
+        #quantity: Faker::Number.number(2),
+        #cost: Faker::Commerce.price(0..100.0, false),
+        #order_date: Faker::Date.forward(100),
+        #client_id: cl, 
+        #product_id: pr,
+        #driver_id: dr)
         
         if i % 2 == 0
             Review.create(qualification: Faker::Number.number(1),
-            content: "",
+            content: "good",
             client_id: cl,
             product_id: pr)
         end
