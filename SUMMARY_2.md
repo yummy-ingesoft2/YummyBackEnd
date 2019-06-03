@@ -32,3 +32,5 @@
 ### Posibles features proximo Sprint
 * Historial de comentarios
 * Clasificación por calificación
+
+v 1.1.1
