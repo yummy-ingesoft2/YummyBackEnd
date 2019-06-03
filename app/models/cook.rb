@@ -43,4 +43,8 @@ class Cook < ApplicationRecord
     def downcase_email
         self.email.downcase!
     end
+    
+    def self.get_products
+        self.joins(:products).select('cooks.name, products.name as product_name')
+    end
 end

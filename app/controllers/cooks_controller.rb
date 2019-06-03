@@ -5,6 +5,7 @@ class CooksController < ApplicationController
 def index
     cities = City.find(params[:city_id])
     cook = cities.cooks.paginate(page: params[:page], per_page: 10)
+    @products = cook.get_products
     render json:cook, status:200
 end
 def show
