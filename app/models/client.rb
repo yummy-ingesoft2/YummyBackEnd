@@ -27,7 +27,7 @@ class Client < ApplicationRecord
     before_save   :downcase_email
     
     belongs_to :city
-    has_many :reviews, as: :reviewable
+    has_many :reviews
     has_many :orders, as: :orderable
     validates :name, presence: true,length: { maximum: 45 }
     validates :last_name, presence: true,length: { maximum: 45}

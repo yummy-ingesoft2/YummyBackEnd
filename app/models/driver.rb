@@ -14,8 +14,7 @@
 #
 # Indexes
 #
-#  index_drivers_on_auth_token  (auth_token) UNIQUE
-#  index_drivers_on_city_id     (city_id)
+#  index_drivers_on_city_id  (city_id)
 #
 
 
