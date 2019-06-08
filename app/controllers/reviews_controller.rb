@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_client, only: [:create,:show]
   before_action :set_reviews, only: [:show, :update, :destroy]
   def index
     #products = Product.find(params[:product_id]) 
@@ -13,13 +14,17 @@ class ReviewsController < ApplicationController
   	render json:review, status:201
   end
   def create
-    review = Review.new(review_params)
-
+    if current_client
+    products = Product.find(params[:product_id])
+    review = products.reviews.new(review_params)
+    review.client_id = current_client.id
     if review.save
       render json: review, status: :created  
     else
       render json: review.errors, status: :unprocessable_entity
     end
+  else
+  end
 end
 def update
   if @reviews.update(review_params)
@@ -42,6 +47,6 @@ end
   private
 
   def review_params
-    params.require(:review).permit(:qualification, :content, :client_id, :product_id)
+    params.require(:review).permit(:qualification, :content, :product_id, :client_id)
   end
 end

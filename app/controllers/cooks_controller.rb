@@ -23,7 +23,7 @@ end
 
 def create
 	cities = City.find(params[:city_id])
-    cook = Cook.new(cook_params)
+    cook = cities.cooks.new(cook_params)
 
     if cook.save
       render json: cook, status: :created, location: cities

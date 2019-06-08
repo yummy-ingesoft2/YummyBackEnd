@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
+    before_action :authenticate_cook, only: [:show, :create]
     
 def index
     #cook = Cook.find(params[:cook_id])
@@ -17,8 +18,8 @@ def show
 end
 
 def create
-	
-    product = Product.new(product_params)
+    cook = Cook.find(params[:cook_id])
+     product = cook.products.new(product_params)
 
     if product.save
       render json: product, status: :created  
