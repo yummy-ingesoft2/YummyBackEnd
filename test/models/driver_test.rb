@@ -3,7 +3,6 @@
 # Table name: drivers
 #
 #  id              :integer          not null, primary key
-#  auth_token      :string
 #  email           :string
 #  last_name       :string
 #  name            :string
