@@ -49,7 +49,7 @@ class ClientsController < ApplicationController
         @clients = cities.clients.find(params[:id])
     end
     def client_params
-          params.require(:client).permit(:name, :last_name, :gender,:birthdate,:email,:latitude,:longitude,:address,:user,:password,:city_id)
+          params.require(:client).permit(:name, :last_name, :gender,:birthdate,:email,:latitude,:longitude,:address,:user,:password,:city_id, :picture)
     end
 end
 

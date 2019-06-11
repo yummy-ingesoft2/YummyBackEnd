@@ -7,6 +7,7 @@
 #  last_name       :string
 #  name            :string
 #  password_digest :string
+#  picture         :string
 #  user            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

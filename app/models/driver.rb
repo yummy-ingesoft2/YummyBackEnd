@@ -7,6 +7,7 @@
 #  last_name       :string
 #  name            :string
 #  password_digest :string
+#  picture         :string
 #  user            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -21,6 +22,7 @@
 class Driver < ApplicationRecord
     has_secure_password
     before_save   :downcase_email
+    mount_uploader :picture, PictureUploader
     
     has_many :orders, as: :orderable
     belongs_to :city
