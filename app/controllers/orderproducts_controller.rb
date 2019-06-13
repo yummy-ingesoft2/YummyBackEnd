@@ -3,23 +3,26 @@ class OrderproductsController < ApplicationController
 
   # GET /orderproducts
   def index
-    @orderproducts = Orderproduct.all
-    render json: @orderproducts
+    orders = Order.find(params[:order_id]) 
+    orderproducts = Orderproduct.get_orders_info(params[:order_id], params[:page])
+    render json: orderproducts
   end
 
   # GET /orderproducts/1
   def show
-    render json: @orderproduct
+    orderproducts = Orderproduct.get_order(params[:order_id], params[:id])
+  	render json:orderproducts, status:201
   end
 
   # POST /orderproducts
   def create
-    @orderproduct = Orderproduct.new(orderproduct_params)
+    orders = Order.find(params[:order_id])
+    orderproduct = orders.orderproducts.new(orderproduct_params)
     #@orderproduct=@orderproducts.cost(:quantity)
-    if @orderproduct.save
-      render json: @orderproduct, status: :created, location: @orderproduct
+    if orderproduct.save
+      render json: orderproduct, status: :created
     else
-      render json: @orderproduct.errors, status: :unprocessable_entity
+      render json: orderproduct.errors, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +43,8 @@ class OrderproductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orderproduct
-      @orderproduct = Orderproduct.find(params[:id])
+      orders =Order.find(params[:order_id])
+      @orderproduct = orders.orderproducts.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

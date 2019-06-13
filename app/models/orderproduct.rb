@@ -23,4 +23,11 @@ class Orderproduct < ApplicationRecord
   def self.cost ()
        self.joins(:product).where('products.id = 805')
   end
+  def self.get_orders_info(order_id, page)
+    self.where("order_id = ?",order_id).paginate(page: page, per_page: 10)
+end
+
+def self.get_order(order_id, id)
+    self.where("order_id = ? and id = ?",order_id, id)
+end
 end

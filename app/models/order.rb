@@ -19,8 +19,8 @@
 class Order < ApplicationRecord
     belongs_to :client
     belongs_to :driver
-    has_many :order_products
-    has_many :products, through: :order_products
+    has_many :orderproducts , dependent: :destroy 
+    has_many :products, through: :orderproducts
     #validates :state, presence: true
     validates :order_date, presence: true
 end

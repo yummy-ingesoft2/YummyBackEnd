@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :orderproducts
   post 'cook_token' => 'cook_token#create'
   post 'client_token' => 'client_token#create'
   post 'driver_token' => 'driver_token#create'
@@ -8,7 +7,11 @@ Rails.application.routes.draw do
     get 'drivers/current' => 'drivers#current'
     resources :drivers
     get 'clients/current' => 'clients#current'
-    resources :clients 
+    resources :clients do
+      resources :orders do 
+        resources :orderproducts
+      end
+    end
     get 'cooks/current' => 'cooks#current'
     resources :cooks do
      resources :products do  

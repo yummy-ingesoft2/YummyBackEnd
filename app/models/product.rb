@@ -20,8 +20,8 @@
 class Product < ApplicationRecord
     mount_uploader :photos, PictureUploader
     belongs_to :cook
-    has_many :order_products
-    has_many :orders, through: :order_products
+    has_many :orderproducts
+    has_many :orders, through: :orderproducts
     has_many :reviews
     validates :name, presence: true,length: { maximum: 45 }
     validates :cost, presence: true

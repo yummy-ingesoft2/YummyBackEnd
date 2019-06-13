@@ -17,5 +17,7 @@
 #
 
 class OrderSerializer < ActiveModel::Serializer
-  attributes :cost, :order_date, :quantity, :state
+  attributes  :order_date, :state
+  has_one :client
+  has_one :driver
 end
