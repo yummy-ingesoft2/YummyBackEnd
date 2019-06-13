@@ -30,7 +30,7 @@ class Client < ApplicationRecord
     mount_uploader :picture, PictureUploader
     belongs_to :city
     has_many :reviews
-    has_many :orders, as: :orderable
+    has_many :orders
     validates :name, presence: true,length: { maximum: 45 }
     validates :last_name, presence: true,length: { maximum: 45}
     validates :latitude, presence: true,length: { maximum: 30 }

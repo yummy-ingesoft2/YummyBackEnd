@@ -24,7 +24,7 @@ class Driver < ApplicationRecord
     before_save   :downcase_email
     mount_uploader :picture, PictureUploader
     
-    has_many :orders, as: :orderable
+    has_many :orders
     belongs_to :city
     validates :user, presence: true ,length: { maximum: 15 }, uniqueness: { case_sensitive: false }
     validates :name, presence: true ,length: { maximum: 30 }

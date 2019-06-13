@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
-    #before_action :authenticate_cook, only: [:show, :create]
+    before_action :authenticate_cook, only: [:show, :create]
     
 def index
   @products = Product.all  

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_200017) do
+ActiveRecord::Schema.define(version: 2019_06_13_154733) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -75,22 +75,26 @@ ActiveRecord::Schema.define(version: 2019_06_11_200017) do
     t.index ["city_id"], name: "index_drivers_on_city_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.string "orderable_type"
-    t.integer "orderable_id"
-    t.boolean "state"
+  create_table "orderproducts", force: :cascade do |t|
     t.integer "quantity"
     t.integer "cost"
+    t.integer "order_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_orderproducts_on_order_id"
+    t.index ["product_id"], name: "index_orderproducts_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.boolean "state"
     t.date "order_date"
     t.integer "client_id"
-    t.integer "product_id"
     t.integer "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_orders_on_client_id"
     t.index ["driver_id"], name: "index_orders_on_driver_id"
-    t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable_type_and_orderable_id"
-    t.index ["product_id"], name: "index_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
