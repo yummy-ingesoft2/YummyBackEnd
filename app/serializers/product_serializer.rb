@@ -7,6 +7,7 @@
 #  cost        :integer
 #  description :text
 #  name        :string
+#  photos      :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  cook_id     :integer
@@ -17,5 +18,5 @@
 #
 
 class ProductSerializer < ActiveModel::Serializer
-  attributes :category, :cost, :description, :name
+  attributes :category, :cost, :description, :name ,:photos
 end

@@ -55,6 +55,6 @@ end
 
     # Only allow a trusted parameter "white list" through.
     def driver_params
-      params.require(:driver).permit(:name,:last_name,:user,:password, :password_confirmation,:email,:city_id)
+      params.require(:driver).permit(:name,:last_name,:user,:password, :password_confirmation,:email,:city_id, :picture)
     end
 end

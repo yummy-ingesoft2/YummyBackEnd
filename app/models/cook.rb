@@ -12,6 +12,7 @@
 #  longitude       :string
 #  name            :string
 #  password_digest :string
+#  picture         :string
 #  state           :boolean
 #  tel             :integer
 #  user            :string
@@ -28,6 +29,7 @@ class Cook < ApplicationRecord
     has_secure_password
     before_save   :downcase_email
     
+    mount_uploader :picture, PictureUploader
     has_many :products
     belongs_to :city
     validates :name, presence: true,length: { maximum: 45 }
