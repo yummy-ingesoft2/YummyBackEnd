@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_06_13_154733) do
 
-  create_table "admins", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.string "email"
-  end
-
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
