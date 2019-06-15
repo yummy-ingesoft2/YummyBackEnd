@@ -55,3 +55,4 @@ gem 'faker', require: false
 gem 'will_paginate-bootstrap'
 gem 'will_paginate', '~> 3.1.0'
 gem 'carrierwave'
+gem "letter_opener", group: :development
