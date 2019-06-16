@@ -1,10 +1,16 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_client, only: [:create,:show]
+  before_action :authenticate_client, only: [:index,:create,:show]
+  before_action :authenticate_cook, only: [:index,:show]
   before_action :set_reviews, only: [:show, :update, :destroy]
+  before_action :authenticate_admin, only: [:all]
   def index
     #products = Product.find(params[:product_id]) 
     #review = products.reviews
     @reviews = Review.get_reviews_info(params[:product_id], params[:page])
+    render json: @reviews, status:200
+  end
+  def all
+    @reviews = Review.all
     render json: @reviews, status:200
   end
   def show

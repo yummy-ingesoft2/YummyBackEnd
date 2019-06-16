@@ -1,6 +1,7 @@
 class DriversController < ApplicationController
 
-  before_action :authenticate_driver, only: [:show, :current]
+  before_action :authenticate_driver, only: [:show, :current,:update,:delete]
+  before_action :authenticate_admin, only: [:index,:all]
   before_action :set_driver, only: [:show, :update, :destroy]
   
   def index
@@ -9,7 +10,10 @@ class DriversController < ApplicationController
       @drivers = Driver.get_drivers_names(params[:city_id], params[:page])
       render json: @drivers, status:200
   end
-  
+  def all
+    @drivers = Driver.all
+    render json: @drivers, status:200
+  end
     
     def show
       #cities = City.find(params[:city_id])
@@ -17,6 +21,7 @@ class DriversController < ApplicationController
       driver = Driver.get_driver(params[:city_id], params[:id])
       render json:drivers, status:201
     end
+    
     
     def current
       render json: current_driver

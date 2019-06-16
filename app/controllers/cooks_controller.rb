@@ -1,5 +1,6 @@
 class CooksController < ApplicationController
-  before_action :authenticate_cook, only: [:show, :current]
+  before_action :authenticate_cook, only: [:show, :current,:update,:delete]
+  before_action :authenticate_admin, only: [:index,:all]
   before_action :set_cook, only: [:show, :update, :destroy]
     
 def index
@@ -8,6 +9,10 @@ def index
     #@products = cook.get_products
     @cooks = Cook.get_cooks_names(params[:city_id], params[:page])
     render json: @cooks, status:200
+end
+def all
+  @cooks = Cook.all
+  render json: @cooks, status:200
 end
 
 def show

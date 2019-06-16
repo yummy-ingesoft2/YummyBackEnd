@@ -1,12 +1,17 @@
 class ClientsController < ApplicationController
-  before_action :authenticate_client, only: [:show, :current]
+  before_action :authenticate_client, only: [:show, :current,:update, :delete]
   before_action :set_client, only: [:show, :update, :destroy]
+  before_action :authenticate_admin, only: [:index,:all]
 
   def index
       #cities = City.find(params[:city_id])
       #client = cities.clients.paginate(page: params[:page], per_page: 10)
       @clients = Client.get_clients_names(params[:city_id], params[:page])
       render json: @clients, status:200
+  end
+  def all
+    @clients = Client.all
+    render json: @clients, status:200
   end
   
   def show

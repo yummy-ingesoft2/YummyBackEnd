@@ -3,6 +3,15 @@ Rails.application.routes.draw do
   post 'cook_token' => 'cook_token#create'
   post 'client_token' => 'client_token#create'
   post 'driver_token' => 'driver_token#create'
+  post 'admin_token' => 'admin_token#create'
+  get 'admins/current' => 'admins#current'
+  get 'clients/all' => 'clients#all'
+  get 'cooks/all' => 'cooks#all'
+  get 'drivers/all' => 'drivers#all'
+  get 'products/all' => 'products#all'
+  get 'reviews/all' => 'reviews#all'
+  get 'orders/all' => 'orders#all'
+  resources :admins
   resources :cities do
     get 'drivers/current' => 'drivers#current'
     resources :drivers

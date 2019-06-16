@@ -1,14 +1,19 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
-    before_action :authenticate_cook, only: [:show, :create]
-    
+    before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
+    before_action :authenticate_client, only: [:index,:show]
+    before_action :authenticate_admin, only: [:all]
 def index
-  @products = Product.all  
+  #@products = Product.all  
   #cook = Cook.find(params[:cook_id])
     #cook = Cook.get_cook(params[:city_id], params[:cook_id])
     ##@products = Cook.get_products(params[:city_id], params[:cook_id]).paginate(page: params[:page], per_page: 10)
-    #@products = Product.get_products_info(params[:cook_id], params[:page])
+    @products = Product.get_products_info(params[:cook_id], params[:page])
     render json: @products, status:200
+end
+def all
+  @products = Product.all
+  render json: @products, status:200
 end
 
 def show

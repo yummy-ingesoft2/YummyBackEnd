@@ -1,13 +1,17 @@
 class OrderproductsController < ApplicationController
+  before_action :authenticate_client, only: [:index,:create,:show,:update]
   before_action :set_orderproduct, only: [:show, :update, :destroy]
-
+  before_action :authenticate_admin, only: [:all,:delete]
   # GET /orderproducts
   def index
     orders = Order.find(params[:order_id]) 
     orderproducts = Orderproduct.get_orders_info(params[:order_id], params[:page])
     render json: orderproducts
   end
-
+  def all
+    @orderp = Orderproduct.all
+    render json: @orderp, status:200
+  end
   # GET /orderproducts/1
   def show
     orderproducts = Orderproduct.get_order(params[:order_id], params[:id])
