@@ -73,7 +73,9 @@ ActiveRecord::Schema.define(version: 2019_06_16_183426) do
     t.string "name"
     t.string "last_name"
     t.integer "city_id"
+    t.string "auth_token"
     t.string "picture"
+    t.index ["auth_token"], name: "index_drivers_on_auth_token", unique: true
     t.index ["city_id"], name: "index_drivers_on_city_id"
   end
 
@@ -89,14 +91,21 @@ ActiveRecord::Schema.define(version: 2019_06_16_183426) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string "orderable_type"
+    t.integer "orderable_id"
     t.boolean "state"
+    t.integer "quantity"
+    t.integer "cost"
     t.date "order_date"
     t.integer "client_id"
+    t.integer "product_id"
     t.integer "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_orders_on_client_id"
     t.index ["driver_id"], name: "index_orders_on_driver_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable_type_and_orderable_id"
+    t.index ["product_id"], name: "index_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -112,6 +121,8 @@ ActiveRecord::Schema.define(version: 2019_06_16_183426) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.string "reviewable_type"
+    t.integer "reviewable_id"
     t.integer "qualification"
     t.text "content"
     t.integer "client_id"
@@ -120,6 +131,7 @@ ActiveRecord::Schema.define(version: 2019_06_16_183426) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_reviews_on_client_id"
     t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
   end
 
 end

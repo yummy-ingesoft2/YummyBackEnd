@@ -18,8 +18,18 @@ end
 def show
 	#cities = City.find(params[:city_id])
   #cooks = cities.cooks.find(params[:id])
-  cook = Cook.get_cook(params[:city_id], params[:id])
-	render json:cook, status:201
+	@cook = Cook.get_cook(params[:city_id], params[:id])
+	render json: @cook, status:201
+	respond_to do |format|
+	  format.html
+	  format.pdf do 
+	    pdf = CookPdf.new(@cook)
+	    send_data pdf.render, filename: "cook_#{ @cook.name}.pdf",
+	                          type: "application/pdf",
+	                          disposition: "inline"
+	  end
+	end
+
 end
 
 def current
