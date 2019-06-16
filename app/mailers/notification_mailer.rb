@@ -4,4 +4,10 @@ class NotificationMailer < ApplicationMailer
         @product = product
         mail(to: user.email, subject: 'New products added')
     end
+    def new_comment(user,product,comment)
+    @user = user
+    @product = product
+    @comment = comment
+    mail(to: user.email, subject: 'New comment about '+product.name )
+    end
 end

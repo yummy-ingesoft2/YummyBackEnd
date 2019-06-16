@@ -15,10 +15,12 @@ class ReviewsController < ApplicationController
   end
   def create
     if current_client
+    user = Cook.find(params[:cook_id])
     products = Product.find(params[:product_id])
     review = products.reviews.new(review_params)
     review.client_id = current_client.id
     if review.save
+      NotificationMailer.new_comment(user,products,review).deliver_now
       render json: review, status: :created  
     else
       render json: review.errors, status: :unprocessable_entity
