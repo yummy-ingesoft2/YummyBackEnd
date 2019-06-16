@@ -26,6 +26,7 @@ def create
     cook = cities.cooks.new(cook_params)
 
     if cook.save
+      UserMailer.new_user(cook).deliver_now
       render json: cook, status: :created, location: cities
     else
       render json: cook.errors, status: :unprocessable_entity

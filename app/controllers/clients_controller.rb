@@ -22,9 +22,10 @@ class ClientsController < ApplicationController
   
   def create
   	cities = City.find(params[:city_id])
-      client = Client.new(client_params)
+      client = cities.clients.new(client_params)
   
       if client.save
+        UserMailer.new_user(client).deliver_now
         render json: client, status: :created, location: cities
       else
         render json: client.errors, status: :unprocessable_entity

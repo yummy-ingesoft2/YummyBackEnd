@@ -71,14 +71,15 @@ puts 'started loading data'
         pr = productsList.sample
         dr = driversList.sample
         
-        Order.create(state: Faker::Boolean.boolean,
+        ord=Order.create(state: Faker::Boolean.boolean,
         order_date: Faker::Date.forward(100),
         client_id: cl, 
         driver_id: dr)
 
-        #quantity: Faker::Number.number(2),
-        #cost: Faker::Commerce.price(0..100.0, false),
-        #product_id: pr,
+        Orderproduct.create(quantity: Faker::Number.number(2),
+        cost: Faker::Commerce.price(0..100.0, false),
+        product_id: pr,
+        order_id: ord.id)
 
         if i % 2 == 0
             Review.create(qualification: Faker::Number.number(1),
