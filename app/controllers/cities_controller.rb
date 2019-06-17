@@ -1,5 +1,6 @@
 class CitiesController < ApplicationController
     before_action :set_city, only: [:show, :update, :destroy]
+    before_action :authenticate_admin, only: [:index,:create, :update, :delete]
 
 def index
     #@cities = City.all.paginate(page: params[:page], per_page: 2)
@@ -9,7 +10,15 @@ end
 
   # GET /zombies/1
   def show
-    render json: @city
+    respond_to do |format|
+      format.html {render json: @city, status:201}
+  	  format.pdf do 
+  	    pdf = CityPdf.new(@city)
+  	    send_data pdf.render, filename: "city_#{ @city.name}.pdf",
+  	                          type: "application/pdf",
+  	                          disposition: "inline"
+  	  end
+  	end
   end
 
   # POST /zombies

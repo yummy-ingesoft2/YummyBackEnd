@@ -12,6 +12,7 @@
 #  longitude       :string
 #  name            :string
 #  password_digest :string
+#  picture         :string
 #  state           :boolean
 #  tel             :integer
 #  user            :string

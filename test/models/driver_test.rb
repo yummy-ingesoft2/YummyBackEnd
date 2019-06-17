@@ -3,11 +3,11 @@
 # Table name: drivers
 #
 #  id              :integer          not null, primary key
-#  auth_token      :string
 #  email           :string
 #  last_name       :string
 #  name            :string
 #  password_digest :string
+#  picture         :string
 #  user            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

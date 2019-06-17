@@ -54,3 +54,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'faker', require: false
 gem 'will_paginate-bootstrap'
 gem 'will_paginate', '~> 3.1.0'
+gem 'carrierwave'
+gem "letter_opener", group: :development
+gem 'httparty'
+gem 'prawn'
+gem 'prawn-table'
+gem 'responders'

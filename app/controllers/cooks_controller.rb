@@ -1,5 +1,6 @@
 class CooksController < ApplicationController
-  before_action :authenticate_cook, only: [:show, :current]
+  before_action :authenticate_cook, only: [:show, :current,:update,:delete]
+  before_action :authenticate_admin, only: [:index,:all]
   before_action :set_cook, only: [:show, :update, :destroy]
     
 def index
@@ -9,12 +10,25 @@ def index
     @cooks = Cook.get_cooks_names(params[:city_id], params[:page])
     render json: @cooks, status:200
 end
+def all
+  @cooks = Cook.all
+  render json: @cooks, status:200
+end
 
 def show
-	#cities = City.find(params[:city_id])
-  #cooks = cities.cooks.find(params[:id])
-  cook = Cook.get_cook(params[:city_id], params[:id])
-	render json:cook, status:201
+	cities = City.find(params[:city_id])
+  @cook = cities.cooks.find(params[:id])
+	#@cook = Cook.get_cook(params[:city_id], params[:id])
+	respond_to do |format|
+    format.html {render json: @cook, status:201}
+    format.json {render json: @cook, status:201}
+	  format.pdf do 
+	    pdf = CookPdf.new(@cook)
+	    send_data pdf.render, filename: "cook_#{ @cook.name}.pdf",
+	                          type: "application/pdf",
+	                          disposition: "inline"
+	  end
+	end
 end
 
 def current
@@ -23,9 +37,10 @@ end
 
 def create
 	cities = City.find(params[:city_id])
-    cook = Cook.new(cook_params)
+    cook = cities.cooks.new(cook_params)
 
     if cook.save
+      UserMailer.new_user(cook).deliver_now
       render json: cook, status: :created, location: cities
     else
       render json: cook.errors, status: :unprocessable_entity
@@ -50,7 +65,7 @@ end
         @cooks = cities.cooks.find(params[:id])
     end
     def cook_params
-          params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:city_id)
+          params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:city_id,:picture)
           
     end
 end
