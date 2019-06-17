@@ -30,4 +30,9 @@ class Order < ApplicationRecord
     has_many :products, through: :orderproducts
     #validates :state, presence: true
     validates :order_date, presence: true
+
+    def self.product(order_id)
+        self.joins(:orderproducts).where("order_id = ?",order_id).select('orders.order_date,orders.state,orderproducts.*')
+    end
+    
 end

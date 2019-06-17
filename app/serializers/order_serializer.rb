@@ -24,7 +24,13 @@
 #
 
 class OrderSerializer < ActiveModel::Serializer
-  attributes  :order_date, :state
+  attributes  :order_date, :state ,:id
+  #def product
+  #  {id: self.object.product_id,
+  #  quantity: self.object.quantity,
+  #  cost:self.object.cost
+  #  }
+  #end 
   has_one :client
   has_one :driver
 end

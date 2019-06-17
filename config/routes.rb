@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'products/all' => 'products#all'
   get 'reviews/all' => 'reviews#all'
   get 'orders/all' => 'orders#all'
+  get 'orderproducts/all' => 'orderproducts#all'
   resources :admins
   resources :cities do
     get 'drivers/current' => 'drivers#current'

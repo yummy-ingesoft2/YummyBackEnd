@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_client, only: [:index,:create,:show]
-  before_action :authenticate_driver, only: [:show]
+  #before_action :authenticate_client, only: [:index,:create,:show]
+  #before_action :authenticate_driver, only: [:show]
   before_action :set_orders, only: [:show, :update, :destroy]
   before_action :authenticate_admin, only: [:all,:update,:delete]
   def index
@@ -15,7 +15,9 @@ class OrdersController < ApplicationController
   def show
     clients = Client.find(params[:client_id])
     order = clients.orders.find(params[:id])
-  	render json:order, status:201
+    #@order=Order.product(order)
+    render json:order, status:201
+    
   end
   
   def create
