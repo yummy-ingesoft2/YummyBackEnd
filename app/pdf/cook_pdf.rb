@@ -7,11 +7,12 @@ class CookPdf < Prawn::Document
     end
     
     def cook_number
-        text "Cook \##{@cook.id}", size: 18, style: bold
+        text "Cook \##{@cook.id}", size: 18
     end
     
     def cook_data
         move_down 20
-        table ["Nombre: ",@cook.name]["Telefono: ",@cook.tel]
+        #text "Cook #{@cook.name}"
+        #table ["Nombre: ",@cook.name]["Telefono: ",@cook.tel]
     end
 end

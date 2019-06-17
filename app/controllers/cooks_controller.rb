@@ -29,7 +29,6 @@ def show
 	                          disposition: "inline"
 	  end
 	end
-
 end
 
 def current
