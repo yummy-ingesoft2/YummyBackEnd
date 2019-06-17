@@ -1,5 +1,5 @@
 class CooksController < ApplicationController
-  #before_action :authenticate_cook, only: [:show, :current,:update,:delete]
+  before_action :authenticate_cook, only: [:show, :current,:update,:delete]
   before_action :authenticate_admin, only: [:index,:all]
   before_action :set_cook, only: [:show, :update, :destroy]
     

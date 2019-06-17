@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  #before_action :authenticate_client, only: [:index,:create,:show]
-  #before_action :authenticate_driver, only: [:show]
+  before_action :authenticate_client, only: [:index,:create,:show]
+  before_action :authenticate_driver, only: [:show]
   before_action :set_orders, only: [:show, :update, :destroy]
   before_action :authenticate_admin, only: [:all,:update,:delete]
   def index
@@ -16,13 +16,12 @@ class OrdersController < ApplicationController
     clients = Client.find(params[:client_id])
     @order = clients.orders.find(params[:id])
     #@order=Order.product(order)
-    render json: @order, status:201
     respond_to do |format|
     format.html {render json: @order, status:201}
     format.json {render json: @order, status:201}
 	  format.pdf do 
 	    pdf = OrderPdf.new(@order)
-	    send_data pdf.render, filename: "order_#{ @order.name}.pdf",
+	    send_data pdf.render, filename: "order_#{ @order.id}.pdf",
 	                          type: "application/pdf",
 	                          disposition: "inline"
 	  end

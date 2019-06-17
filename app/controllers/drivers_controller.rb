@@ -1,6 +1,6 @@
 class DriversController < ApplicationController
 
-  #before_action :authenticate_driver, only: [:show, :current,:update,:delete]
+  before_action :authenticate_driver, only: [:show, :current,:update,:delete]
   before_action :authenticate_admin, only: [:index,:all]
   before_action :set_driver, only: [:show, :update, :destroy]
   

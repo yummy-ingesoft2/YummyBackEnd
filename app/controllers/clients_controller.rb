@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  #before_action :authenticate_client, only: [:show, :current,:update, :delete]
+  before_action :authenticate_client, only: [:show, :current,:update, :delete]
   before_action :set_client, only: [:show, :update, :destroy]
   before_action :authenticate_admin, only: [:index,:all]
 

@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  #before_action :authenticate_client, only: [:index,:create,:show]
-  #before_action :authenticate_cook, only: [:index,:show]
+  before_action :authenticate_client, only: [:index,:create,:show]
+  before_action :authenticate_cook, only: [:index,:show]
   before_action :set_reviews, only: [:show, :update, :destroy]
   before_action :authenticate_admin, only: [:all]
   def index
@@ -16,8 +16,17 @@ class ReviewsController < ApplicationController
   def show
     products = Product.find(params[:product_id])
     @review = products.reviews.find(params[:id])
+    respond_to do |format|
+      format.html {render json: @review, status:201}
+      format.json {render json: @review, status:201}
+      format.pdf do 
+        pdf = ReviewPdf.new(@review)
+        send_data pdf.render, filename: "order_#{ @review.id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
 	  #@review = Review.get_review(params[:product_id], params[:id])
-  	render json: @review, status:201
   end
   def create
     if current_client

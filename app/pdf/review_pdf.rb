@@ -12,8 +12,8 @@ class ReviewPdf < Prawn::Document
     
     def review_data
         move_down 20
-        table([ ["id del producto", "id del cliente","calificacion"],
-        ["#{@review.product_id}", "#{@review.client_id}","#{@review.qualification}"] ]) do
+        table([ ["id del producto", "id del cliente","calificacion","Comentario"],
+        ["#{@review.product_id}", "#{@review.client_id}","#{@review.qualification}","#{@review.content}"] ]) do
         self.header = true
         self.row_colors = ["DDDDDD","FFFFFF"]
     end
