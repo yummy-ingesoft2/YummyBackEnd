@@ -13,6 +13,8 @@ class CookPdf < Prawn::Document
     def cook_data
         move_down 20
         #text "Cook #{@cook.name}"
-        #table ["Nombre: ",@cook.name]["Telefono: ",@cook.tel]
+        table([ ["Nombre", "Telefono","Correo"],
+        ["#{@cook.name}", "#{@cook.tel}","#{@cook.email}"] ])
+
     end
 end

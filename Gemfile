@@ -58,4 +58,5 @@ gem 'carrierwave'
 gem "letter_opener", group: :development
 gem 'httparty'
 gem 'prawn'
+gem 'prawn-table'
 gem 'responders'

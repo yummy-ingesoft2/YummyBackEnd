@@ -1,5 +1,5 @@
 class CooksController < ApplicationController
-  before_action :authenticate_cook, only: [:show, :current,:update,:delete]
+  #before_action :authenticate_cook, only: [:show, :current,:update,:delete]
   before_action :authenticate_admin, only: [:index,:all]
   before_action :set_cook, only: [:show, :update, :destroy]
     
@@ -16,12 +16,12 @@ def all
 end
 
 def show
-	#cities = City.find(params[:city_id])
-  #cooks = cities.cooks.find(params[:id])
-	@cook = Cook.get_cook(params[:city_id], params[:id])
-	render json: @cook, status:201
+	cities = City.find(params[:city_id])
+  @cook = cities.cooks.find(params[:id])
+	#@cook = Cook.get_cook(params[:city_id], params[:id])
 	respond_to do |format|
-	  format.html
+    format.html
+    format.json {render json: @cook, status:201}
 	  format.pdf do 
 	    pdf = CookPdf.new(@cook)
 	    send_data pdf.render, filename: "cook_#{ @cook.name}.pdf",
