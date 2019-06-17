@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
-    before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
-    before_action :authenticate_client, only: [:index,:show]
+    #before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
+    #before_action :authenticate_client, only: [:index,:show]
     before_action :authenticate_admin, only: [:all]
 def index
   #@products = Product.all  
@@ -17,10 +17,19 @@ def all
 end
 
 def show
-	#cooks = Cook.find(params[:cook_id])
-  #products = cooks.products.find(params[:id])
-	product = Product.get_product(params[:cook_id], params[:id])
-	render json:product, status:201
+	cooks = Cook.find(params[:cook_id])
+  @product = cooks.products.find(params[:id])
+	#@product = Product.get_product(params[:cook_id], params[:id])
+	respond_to do |format|
+    format.html {render json: @product, status:201}
+    format.json {render json: @product, status:201}
+	  format.pdf do 
+	    pdf = ProductPdf.new(@product)
+	    send_data pdf.render, filename: "product_#{ @product.name}.pdf",
+	                          type: "application/pdf",
+	                          disposition: "inline"
+	  end
+	end
 end
 
 

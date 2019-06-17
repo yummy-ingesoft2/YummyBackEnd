@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_client, only: [:index,:create,:show]
-  before_action :authenticate_cook, only: [:index,:show]
+  #before_action :authenticate_client, only: [:index,:create,:show]
+  #before_action :authenticate_cook, only: [:index,:show]
   before_action :set_reviews, only: [:show, :update, :destroy]
   before_action :authenticate_admin, only: [:all]
   def index
@@ -14,10 +14,10 @@ class ReviewsController < ApplicationController
     render json: @reviews, status:200
   end
   def show
-    #products = Product.find(params[:product_id])
-    #reviews = products.reviews.find(params[:id])
-	  review = Review.get_review(params[:product_id], params[:id])
-  	render json:review, status:201
+    products = Product.find(params[:product_id])
+    @review = products.reviews.find(params[:id])
+	  #@review = Review.get_review(params[:product_id], params[:id])
+  	render json: @review, status:201
   end
   def create
     if current_client
@@ -31,16 +31,17 @@ class ReviewsController < ApplicationController
     else
       render json: review.errors, status: :unprocessable_entity
     end
-  else
+    else
+    end
   end
-end
-def update
-  if @reviews.update(review_params)
-    render json: @reviews
-  else
-    render json: @reviews.errors, status: :unprocessable_entity
+  
+  def update
+    if @reviews.update(review_params)
+      render json: @reviews
+    else
+      render json: @reviews.errors, status: :unprocessable_entity
+    end
   end
-end
 
 # DELETE /zombies/1
 def destroy

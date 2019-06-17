@@ -14,10 +14,19 @@ class OrdersController < ApplicationController
   end
   def show
     clients = Client.find(params[:client_id])
-    order = clients.orders.find(params[:id])
+    @order = clients.orders.find(params[:id])
     #@order=Order.product(order)
-    render json:order, status:201
-    
+    render json: @order, status:201
+    respond_to do |format|
+    format.html {render json: @order, status:201}
+    format.json {render json: @order, status:201}
+	  format.pdf do 
+	    pdf = OrderPdf.new(@order)
+	    send_data pdf.render, filename: "order_#{ @order.name}.pdf",
+	                          type: "application/pdf",
+	                          disposition: "inline"
+	  end
+	end
   end
   
   def create

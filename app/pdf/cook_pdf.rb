@@ -7,14 +7,16 @@ class CookPdf < Prawn::Document
     end
     
     def cook_number
-        text "Cook \##{@cook.id}", size: 18
+        text "Cook \##{@cook.id}", size: 20
     end
     
     def cook_data
         move_down 20
         #text "Cook #{@cook.name}"
         table([ ["Nombre", "Telefono","Correo"],
-        ["#{@cook.name}", "#{@cook.tel}","#{@cook.email}"] ])
-
+        ["#{@cook.name}", "#{@cook.tel}","#{@cook.email}"] ]) do
+        self.header = true
+        self.row_colors = ["DDDDDD","FFFFFF"]
+    end
     end
 end

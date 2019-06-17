@@ -20,7 +20,7 @@ def show
   @cook = cities.cooks.find(params[:id])
 	#@cook = Cook.get_cook(params[:city_id], params[:id])
 	respond_to do |format|
-    format.html
+    format.html {render json: @cook, status:201}
     format.json {render json: @cook, status:201}
 	  format.pdf do 
 	    pdf = CookPdf.new(@cook)

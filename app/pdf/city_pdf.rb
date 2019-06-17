@@ -7,12 +7,11 @@ class CityPdf < Prawn::Document
     end
     
     def city_number
-        text "City \##{@city.id}", size: 18
+        text "City \##{@city.id}", size: 20
     end
     
     def city_data
         move_down 20
-        text "City #{@city.name}"
-        #table ["Nombre: ",@city.name]["Telefono: ",@city.tel]
+        text "City name: #{@city.name}"
     end
 end

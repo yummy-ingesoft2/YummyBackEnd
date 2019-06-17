@@ -1,6 +1,6 @@
 class DriversController < ApplicationController
 
-  before_action :authenticate_driver, only: [:show, :current,:update,:delete]
+  #before_action :authenticate_driver, only: [:show, :current,:update,:delete]
   before_action :authenticate_admin, only: [:index,:all]
   before_action :set_driver, only: [:show, :update, :destroy]
   
@@ -16,10 +16,19 @@ class DriversController < ApplicationController
   end
     
     def show
-      #cities = City.find(params[:city_id])
-      #drivers = cities.drivers.find(params[:id])
-      driver = Driver.get_driver(params[:city_id], params[:id])
-      render json:drivers, status:201
+      cities = City.find(params[:city_id])
+      @driver = cities.drivers.find(params[:id])
+      #@driver = Driver.get_driver(params[:city_id], params[:id])
+      respond_to do |format|
+        format.html {render json: @driver, status:201}
+        format.json {render json: @driver, status:201}
+    	  format.pdf do 
+    	    pdf = DriverPdf.new(@driver)
+    	    send_data pdf.render, filename: "driver_#{ @driver.name}.pdf",
+    	                          type: "application/pdf",
+    	                          disposition: "inline"
+    	  end
+    	end
     end
     
     
