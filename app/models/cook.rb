@@ -45,6 +45,9 @@ class Cook < ApplicationRecord
     def downcase_email
         self.email.downcase!
     end
+    def self.cook_default
+        self.create(name:"cook",last_name:"1",user:"cook",password:"123456",email:"cook@yummy.com",address:"kr 73 1",tel:"1234567",latitude:"4.710989",longitude:"-74.072090",city_id:1,picture:"https://yummy123.s3.amazonaws.com/perfil.jpg")
+    end
     
     def self.get_cooks_names(city_id, page)
         self.where("city_id = ?",city_id).paginate(page: page, per_page: 10).pluck(:name)

@@ -6,7 +6,10 @@ class AdminsController < ApplicationController
   # GET /admins
   def index
     if Admin.count == 0
-    admin= Admin.admin_default
+      admin= Admin.admin_default
+      city= City.create(name:"Bogota")
+      cook = Cook.cook_default
+      client= Client.client_default
     else
     @admins = Admin.all
     render json: @admins

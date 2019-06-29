@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
     before_action :set_city, only: [:show, :update, :destroy]
-    before_action :authenticate_admin, only: [:index,:create, :update, :delete]
+    before_action :authenticate_admin, only: [:index,:show,:create, :update, :delete]
 
 def index
     #@cities = City.all.paginate(page: params[:page], per_page: 2)

@@ -65,7 +65,7 @@ end
         @cooks = cities.cooks.find(params[:id])
     end
     def cook_params
-          params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:city_id,:picture)
+          params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:password_confirmation,:city_id,:picture)
           
     end
 end

@@ -60,3 +60,4 @@ gem 'httparty'
 gem 'prawn'
 gem 'prawn-table'
 gem 'responders'
+gem "fog-aws"

@@ -30,9 +30,10 @@ class OrdersController < ApplicationController
   
   def create
     if current_client
+    city =City.find(params[:city_id])
     clients = Client.find(params[:client_id])
     order = clients.orders.new(order_params)
-    order.driver_id = Driver.where("city_id = ?",city_id).take
+    order.driver_id = Driver.where("city_id = ?",city.id).take.id
     if order.save
       render json: order, status: :created  
     else
