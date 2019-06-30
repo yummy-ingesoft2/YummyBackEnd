@@ -60,4 +60,9 @@ class Cook < ApplicationRecord
     def self.get_products(city_id, id)
         self.where("city_id = ? and id = ?",city_id, id).joins(:products).select('cooks.name, products.name as product_name')
     end
+
+    def self.user_c(city_id)
+        self.where("city_id = ?",city_id).select("Count(cooks.id) as Users,cooks.id").group(:created_at)
+    end
+    
 end

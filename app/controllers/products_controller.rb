@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
-    before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
-    before_action :authenticate_client, only: [:index,:show]
-    before_action :authenticate_admin, only: [:all]
+    #before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
+    #before_action :authenticate_client, only: [:index,:show]
+    #before_action :authenticate_admin, only: [:all]
 def index
   #@products = Product.all  
   #cook = Cook.find(params[:cook_id])
@@ -19,7 +19,7 @@ end
 def show
 	cooks = Cook.find(params[:cook_id])
   @product = cooks.products.find(params[:id])
-	#@product = Product.get_product(params[:cook_id], params[:id])
+  #@product = Product.get_product(params[:cook_id], params[:id])
 	respond_to do |format|
     format.html {render json: @product, status:201}
     format.json {render json: @product, status:201}
@@ -31,7 +31,10 @@ def show
 	  end
 	end
 end
-
+def rating
+  product_1=Product.qualification(params[:city_id])
+  render json:product_1 ,each_serializer: Products::RatingSerializer,status:200
+end
 
 def create
     cook = Cook.find(params[:cook_id])

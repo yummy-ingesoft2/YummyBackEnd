@@ -1,7 +1,7 @@
 class OrderproductsController < ApplicationController
-  before_action :authenticate_client, only: [:index,:create,:show,:update]
+  #before_action :authenticate_client, only: [:index,:create,:show,:update]
   before_action :set_orderproduct, only: [:show, :update, :destroy]
-  before_action :authenticate_admin, only: [:all,:delete]
+  #before_action :authenticate_admin, only: [:all,:delete]
   # GET /orderproducts
   def index
     orders = Order.find(params[:order_id]) 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'reviews/all' => 'reviews#all'
   get 'orders/all' => 'orders#all'
   get 'orderproducts/all' => 'orderproducts#all'
+  get 'cities/user_city' => 'cities#user_city'
   resources :admins
   resources :cities do
     get 'drivers/current' => 'drivers#current'
@@ -23,7 +24,9 @@ Rails.application.routes.draw do
       end
     end
     get 'cooks/current' => 'cooks#current'
+    get 'cooks/user_c' => 'cooks#user_c'
     resources :cooks do
+    get 'products/rating' => 'products#rating'
      resources :products do  
           resources :reviews
       end

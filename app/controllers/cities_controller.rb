@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
     before_action :set_city, only: [:show, :update, :destroy]
-    before_action :authenticate_admin, only: [:index,:show,:create, :update, :delete]
+    #before_action :authenticate_admin, only: [:index,:show,:create, :update, :delete]
 
 def index
     #@cities = City.all.paginate(page: params[:page], per_page: 2)
@@ -21,6 +21,11 @@ end
   	end
   end
 
+  # Cuenta los cocineros por ciudad
+def user_city
+  prueba=City.user_city()
+  render json: prueba,each_serializer: Cities::User_citySerializer, status:200
+end
   # POST /zombies
   def create
     @city = City.new(city_params)

@@ -35,6 +35,13 @@ def current
   render json: current_cook
 end
 
+#Cuenta los cocineros creados por dia indicando la ciudad
+def user_c
+  prueba=Cook.user_c(params[:city_id])
+  render json: prueba, status:200
+end
+
+
 def create
 	cities = City.find(params[:city_id])
     cook = cities.cooks.new(cook_params)
