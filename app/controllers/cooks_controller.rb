@@ -37,8 +37,9 @@ end
 
 #Cuenta los cocineros creados por dia indicando la ciudad
 def user_c
+  
   prueba=Cook.user_c(params[:city_id])
-  render json: prueba, status:200
+  render json: prueba,each_serializer: User_cSerializer, status:200
 end
 
 
