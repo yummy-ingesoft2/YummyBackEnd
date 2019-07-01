@@ -35,6 +35,22 @@ def current
   render json: current_cook
 end
 
+#Cuenta los cocineros creados por dia indicando la ciudad
+def user_c
+  
+  prueba=Cook.user_c(params[:city_id])
+  respond_to do |format|
+    format.html {render json: prueba,each_serializer: User_cSerializer, status:200}
+    format.pdf do 
+      pdf = UsersdPdf.new(prueba)
+      send_data pdf.render, filename: "users_by_date.pdf",
+                            type: "application/pdf",
+                            disposition: "inline"
+    end
+  end
+end
+
+
 def create
 	cities = City.find(params[:city_id])
     cook = cities.cooks.new(cook_params)
@@ -65,7 +81,7 @@ end
         @cooks = cities.cooks.find(params[:id])
     end
     def cook_params
-          params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:city_id,:picture)
+          params.require(:cook).permit(:name, :last_name, :gender,:birthdate,:tel,:email,:latitude,:longitude,:address,:user,:password,:password_confirmation,:city_id,:picture)
           
     end
 end

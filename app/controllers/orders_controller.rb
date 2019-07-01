@@ -14,10 +14,10 @@ class OrdersController < ApplicationController
   end
   def show
     clients = Client.find(params[:client_id])
-    @order = clients.orders.find(params[:id])
-    #@order=Order.product(order)
+    order = clients.orders.find(params[:id])
+    @order=Order.product(order)
     respond_to do |format|
-    format.html {render json: @order, status:201}
+    format.html {render json: @order, each_serializer: Orders::ShowSerializer, status:201}
     format.json {render json: @order, status:201}
 	  format.pdf do 
 	    pdf = OrderPdf.new(@order)
@@ -30,9 +30,10 @@ class OrdersController < ApplicationController
   
   def create
     if current_client
+    city =City.find(params[:city_id])
     clients = Client.find(params[:client_id])
     order = clients.orders.new(order_params)
-    order.driver_id = Driver.where("city_id = ?",city_id).take
+    order.driver_id = Driver.where("city_id = ?",city.id).take.id
     if order.save
       render json: order, status: :created  
     else

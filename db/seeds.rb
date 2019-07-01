@@ -75,18 +75,18 @@ puts 'started loading data'
         order_date: Faker::Date.forward(100),
         client_id: cl, 
         driver_id: dr)
-
+     2.times do |i|
         Orderproduct.create(quantity: Faker::Number.number(2),
         cost: Faker::Commerce.price(0..100.0, false),
         product_id: pr,
         order_id: ord.id)
-
-        if i % 2 == 0
-            Review.create(qualification: Faker::Number.number(1),
-            content: "good",
-            client_id: cl,
-            product_id: pr)
         end
+    5.times do |i|   
+        Review.create(qualification: Faker::Number.number(1),
+        content: "good",
+        client_id: cl,
+        product_id: pr)
+        end    
     end
 end
 
