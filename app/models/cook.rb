@@ -67,7 +67,7 @@ class Cook < ApplicationRecord
             a=p.created_at.to_date 
             p.update_attribute(:created_at, a)
         end 
-        self.where("city_id = ?",city_id).select("Count(cooks.id) as Users,cooks.id,cooks.*").group("cooks.created_at")
+        self.where("city_id = ?",city_id).select("Count(cooks.id) as Users,cooks.id,cooks.created_at as date,cooks.* ").group("cooks.created_at")
     end
     
 end

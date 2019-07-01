@@ -65,3 +65,4 @@ gem 'omniauth-google-oauth2'
 
 #http party
 gem 'httparty', '~> 0.17.0'
+gem 'prawn-graph'

@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
-    #before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
-    #before_action :authenticate_client, only: [:index,:show]
-    #before_action :authenticate_admin, only: [:all]
+    before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
+    before_action :authenticate_client, only: [:index,:show]
+    before_action :authenticate_admin, only: [:all]
 def index
   #@products = Product.all  
   #cook = Cook.find(params[:cook_id])
@@ -32,8 +32,17 @@ def show
 	end
 end
 def rating
-  product_1=Product.qualification(params[:city_id])
-  render json:product_1 ,each_serializer: Products::RatingSerializer,status:200
+  product_1=Product.qualification(params[:cook_id])
+  respond_to do |format|
+    format.html {render json:product_1 ,each_serializer: Products::RatingSerializer,status:200}
+	  format.pdf do 
+	    pdf = ProductrPdf.new(product_1)
+	    send_data pdf.render, filename: "product_#{ product_1.name}.pdf",
+	                          type: "application/pdf",
+	                          disposition: "inline"
+	  end
+	end
+  
 end
 
 def create

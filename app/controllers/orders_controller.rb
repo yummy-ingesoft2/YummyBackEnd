@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  #before_action :authenticate_client, only: [:index,:create,:show]
-  #before_action :authenticate_driver, only: [:show]
+  before_action :authenticate_client, only: [:index,:create,:show]
+  before_action :authenticate_driver, only: [:show]
   before_action :set_orders, only: [:show, :update, :destroy]
-  #before_action :authenticate_admin, only: [:all,:update,:delete]
+  before_action :authenticate_admin, only: [:all,:update,:delete]
   def index
     clients = Client.find(params[:client_id]) 
     order = clients.orders

@@ -1,8 +1,9 @@
 class ReviewsController < ApplicationController
-  #before_action :authenticate_client, only: [:index,:create,:show]
-  #before_action :authenticate_cook, only: [:index,:show]
+  before_action :authenticate_client, only: [:index,:create,:show]
+  before_action :authenticate_cook, only: [:index,:show]
   before_action :set_reviews, only: [:show, :update, :destroy]
-  #before_action :authenticate_admin, only: [:all]
+  before_action :authenticate_admin, only: [:all]
+  
   def index
     #products = Product.find(params[:product_id]) 
     #review = products.reviews
