@@ -19,7 +19,7 @@ end
 def show
 	cooks = Cook.find(params[:cook_id])
   @product = cooks.products.find(params[:id])
-	#@product = Product.get_product(params[:cook_id], params[:id])
+  #@product = Product.get_product(params[:cook_id], params[:id])
 	respond_to do |format|
     format.html {render json: @product, status:201}
     format.json {render json: @product, status:201}
@@ -31,7 +31,19 @@ def show
 	  end
 	end
 end
-
+def rating
+  product_1=Product.qualification(params[:cook_id])
+  respond_to do |format|
+    format.html {render json:product_1 ,each_serializer: Products::RatingSerializer,status:200}
+	  format.pdf do 
+	    pdf = ProductrPdf.new(product_1)
+	    send_data pdf.render, filename: "product_#{ product_1.name}.pdf",
+	                          type: "application/pdf",
+	                          disposition: "inline"
+	  end
+	end
+  
+end
 
 def create
     cook = Cook.find(params[:cook_id])

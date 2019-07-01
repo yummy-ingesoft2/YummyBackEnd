@@ -60,4 +60,14 @@ class Cook < ApplicationRecord
     def self.get_products(city_id, id)
         self.where("city_id = ? and id = ?",city_id, id).joins(:products).select('cooks.name, products.name as product_name')
     end
+
+    def self.user_c(city_id)
+        prueba=self.where("city_id = ?",city_id)
+        prueba.each do |p| 
+            a=p.created_at.to_date 
+            p.update_attribute(:created_at, a)
+        end 
+        self.where("city_id = ?",city_id).select("Count(cooks.id) as Users,cooks.id,cooks.created_at as date,cooks.* ").group("cooks.created_at")
+    end
+    
 end

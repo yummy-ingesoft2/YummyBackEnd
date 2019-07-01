@@ -24,6 +24,6 @@ class OrderSerializer < ActiveModel::Serializer
   #  cost:self.object.cost
   #  }
   #end 
-  has_one :client
-  has_one :driver
+  #has_one :client
+  #has_one :driver
 end

@@ -17,4 +17,7 @@ class City < ApplicationRecord
     def self.get_cities_names(page)
         self.all.paginate(page: page, per_page: 5).pluck(:name)
     end
+    def self.user_city()
+        self.joins(:cooks).select("Count(cooks.id) as users,cities.id,cities.name").group(:id)
+    end
 end

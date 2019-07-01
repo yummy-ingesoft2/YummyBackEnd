@@ -21,6 +21,20 @@ end
   	end
   end
 
+  # Cuenta los cocineros por ciudad
+def user_city
+  prueba=City.user_city()
+  respond_to do |format|
+    format.html {render json: prueba,each_serializer: Cities::User_citySerializer, status:200}
+    format.pdf do 
+      pdf = UsersPdf.new(prueba)
+      send_data pdf.render, filename: "users_city.pdf",
+                            type: "application/pdf",
+                            disposition: "inline"
+    end
+  end
+  
+end
   # POST /zombies
   def create
     @city = City.new(city_params)

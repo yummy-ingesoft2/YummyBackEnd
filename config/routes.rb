@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
- 
+  
+  post 'google_auth' => 'google_auth#create'
   post 'cook_token' => 'cook_token#create'
   post 'client_token' => 'client_token#create'
   post 'driver_token' => 'driver_token#create'
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   get 'reviews/all' => 'reviews#all'
   get 'orders/all' => 'orders#all'
   get 'orderproducts/all' => 'orderproducts#all'
+  get 'cities/user_city' => 'cities#user_city'
   resources :admins
   resources :cities do
     get 'drivers/current' => 'drivers#current'
@@ -23,7 +25,9 @@ Rails.application.routes.draw do
       end
     end
     get 'cooks/current' => 'cooks#current'
+    get 'cooks/user_c' => 'cooks#user_c'
     resources :cooks do
+    get 'products/rating' => 'products#rating'
      resources :products do  
           resources :reviews
       end

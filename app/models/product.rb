@@ -27,10 +27,14 @@ class Product < ApplicationRecord
     validates :cost, presence: true
     
     def self.get_products_info(cook_id, page)
-        self.where("cook_id = ?",cook_id).paginate(page: page, per_page: 10).pluck(:name,:cost)
+        self.where("cook_id = ?",cook_id).paginate(page: page, per_page: 10).pluck(:name,:cost,:id)
     end
     
     def self.get_product(cook_id, id)
         self.where("cook_id = ? and id = ?",cook_id, id)
+    end
+
+    def self.qualification(cook_id)
+    self.joins(:reviews).where("cook_id = ?",cook_id).select("AVG(reviews.qualification) as qualification,products.*").group(:id)
     end
 end

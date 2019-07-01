@@ -81,12 +81,12 @@ puts 'started loading data'
         product_id: pr,
         order_id: ord.id)
         end
-        if i % 2 == 0
-            Review.create(qualification: Faker::Number.number(1),
-            content: "good",
-            client_id: cl,
-            product_id: pr)
-        end
+    5.times do |i|   
+        Review.create(qualification: Faker::Number.number(1),
+        content: "good",
+        client_id: cl,
+        product_id: pr)
+        end    
     end
 end
 
