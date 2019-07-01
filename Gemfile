@@ -56,8 +56,12 @@ gem 'will_paginate-bootstrap'
 gem 'will_paginate', '~> 3.1.0'
 gem 'carrierwave'
 gem "letter_opener", group: :development
-gem 'httparty'
 gem 'prawn'
 gem 'prawn-table'
 gem 'responders'
 gem "fog-aws"
+#google auth
+gem 'omniauth-google-oauth2'
+
+#http party
+gem 'httparty', '~> 0.17.0'

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
- 
+  
+  post 'google_auth' => 'google_auth#create'
   post 'cook_token' => 'cook_token#create'
   post 'client_token' => 'client_token#create'
   post 'driver_token' => 'driver_token#create'
