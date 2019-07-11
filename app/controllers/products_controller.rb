@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :update, :destroy]
-    before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
+    #before_action :authenticate_cook, only: [:index,:show, :create,:update,:destroy]
     before_action :authenticate_client, only: [:index,:show]
     before_action :authenticate_admin, only: [:all]
 def index
@@ -51,7 +51,7 @@ def create
 
     if product.save
       ProductNotifierJob.perform_later(cook,product)
-      #NotificationMailer.new_product(cook , product).deliver_now
+      #NotificationMailer.new_product(cook , product).deliver_later
       render json: product, status: :created  
     else
       render json: product.errors, status: :unprocessable_entity
