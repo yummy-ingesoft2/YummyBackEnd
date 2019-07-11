@@ -50,7 +50,8 @@ def create
      product = cook.products.new(product_params)
 
     if product.save
-      NotificationMailer.new_product(cook , product).deliver_now
+      ProductNotifierJob.perform_later(cook,product)
+      #NotificationMailer.new_product(cook , product).deliver_now
       render json: product, status: :created  
     else
       render json: product.errors, status: :unprocessable_entity
