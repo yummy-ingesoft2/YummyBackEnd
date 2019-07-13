@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :admins
   resources :cities do
     get 'drivers/current' => 'drivers#current'
-    resources :drivers
+    resources :drivers,shallow: true
     get 'clients/current' => 'clients#current'
     resources :clients do
       resources :orders do 
