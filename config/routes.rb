@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :drivers,shallow: true
     get 'clients/current' => 'clients#current'
     resources :clients do
+      get 'orders/history' => 'orders#history'
       resources :orders do 
         resources :orderproducts
       end

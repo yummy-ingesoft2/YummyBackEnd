@@ -69,5 +69,5 @@ class Cook < ApplicationRecord
         end 
         self.where("city_id = ?",city_id).select("Count(cooks.id) as Users,cooks.id,cooks.created_at as date,cooks.* ").group("cooks.created_at")
     end
-    
+
 end

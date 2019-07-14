@@ -27,5 +27,7 @@ class Order < ApplicationRecord
     def self.product(order_id)
         self.joins(:orderproducts).where("order_id = ?",order_id).select('orders.order_date,orders.state,orderproducts.*')
     end
-    
+    def self.history(client_id)
+        self.joins(:orderproducts).where("client_id =?  ",client_id).select('orders.order_date,orders.state,orderproducts.*')
+    end
 end

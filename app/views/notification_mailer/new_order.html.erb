@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  
-<title>New Comment</title>
+<title>New Order</title>
  
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -55,9 +55,9 @@
  <tr>
  
 <td style="padding: 20px 0 30px 0;">
- 
-Se ha realizado el siguiente comentario
- 
+     
+Se ha realizado la siguiente orden
+    
 </td>
  
  </tr>
@@ -74,10 +74,10 @@ Se ha realizado el siguiente comentario
  
    <td style="padding: 25px 0 0 0;">
  
-    Producto: <%= @product.name %> 
+    Numero de orden: <%= @order.id %>  
  
    </td>
- 
+   
   </tr>
  
  </table>
@@ -97,30 +97,13 @@ Se ha realizado el siguiente comentario
   <tr>
  
    <td style="padding: 25px 0 0 0;">
-    Calificacion: <%= @comment.qualification%>
+       Fecha: <%= @order.order_date %>  
    </td>
  
   </tr>
  
  </table>
  
-    <td width="260" valign="top">
- 
- <table border="0" cellpadding="0" cellspacing="0" width="100%">
- 
-  <tr>
- 
-   <td style="padding: 25px 0 0 0;">
- 
-    Comentario: <%= truncate(@comment.content, length: 30) %> 
- 
-   </td>
- 
-  </tr>
- 
- </table>
- 
-</td>
 
 </td>
  
