@@ -1,8 +1,9 @@
 class Orders::ShowSerializer < OrderSerializer
-   # attributes :product
-#def product
-  #  {
-   #     quantity: self.object.orderproducts.product_id
-  #  }
-#end
+   attributes :id, :product
+def product
+    {id: self.object.product_id,
+    quantity: self.object.quantity,
+    cost:self.object.cost
+    }
+  end
 end

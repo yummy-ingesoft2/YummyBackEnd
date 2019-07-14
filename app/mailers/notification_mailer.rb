@@ -10,4 +10,9 @@ class NotificationMailer < ApplicationMailer
     @comment = comment
     mail(to: user.email, subject: 'New comment about '+product.name )
     end
+    def new_order(user,order)
+    @user = user
+    @order = order
+    mail(to: user.email, subject: 'New order' )
+    end
 end
