@@ -64,7 +64,7 @@ gem "fog-aws"
 gem 'omniauth-google-oauth2'
 
 #http party
-gem 'httparty', '~> 0.17.0'
+gem 'httparty', '~> 0.21.0'
 gem 'prawn-graph'
 
 gem 'delayed_job'
